@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		City Temperature
+	</title>
+	<script>
+	window.onload = function(){
+		var cityHandle = document.getElementById('city');
+		var cityName = cityHandle.innerHTML.split(" ")[0];
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET',"http://api.openweathermap.org/data/2.5/weather?APPID=a8437fc2adc27c16cfa3bd63f5b72258&units=matric&q="+cityName);
+		xhr.onreadystatechange = function(){
+			if (xhr.readyState== 4 && xhr.status==200){
+				var result= JSON.parse(xhr.responseText);
+				cityHandle.innerHTML=cityName +" temp : " +result.main.temp;
+			}
+		}
+		xhr.send();
+	}	
+	</script>
+</head>
+<body>
+	<h2>City & Temperature</h2>
+	<p id = "city">Bangalore temp : loading</p>
+</body>
+</html>

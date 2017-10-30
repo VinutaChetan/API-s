@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Google Distance
+	</title>
+</head>
+<body>
+	<h2>Enter name to determine gender</h2>
+	<form action="/" method="post" id="form">
+		<label>Enter Origin</label><br/><br/>
+		<input type="text" name="origin" id="origin" /><br/><br/>
+		<label>Enter destination </label><br/><br/>
+		<input type="text" name="destination" id="destination" /><br/><br/>
+		<input type="submit" value="distance"/>
+	</form>	
+
+	<p id="result"></p>
+
+	<script>
+	var formHandle = document.getElementById('form');
+	var originHandle = document.getElementById('origin');
+	var destinationHandle = document.getElementById('destination');
+	var resultHandle = document.getElementById('result');
+
+	formHandle.onsubmit = function(e){
+		e.preventDefault();
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET',"http://maps.googleapis.com/maps/api/distancematrix/json?mode=driving&language=en-EN&origins=" + originHandle.value + "&destinations=" + destinationHandle.value);
+ 
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState == 4 && xhr.status ==200){
+				var response = JSON.parse(xhr.responseText);
+				resultHandle.innerHTML = "The distance of " + originHandle.value + " and " + destinationHandle.value + " is " +	 response.rows[0].elements[0].distance.text;
+			}
+		};
+
+		xhr.send();
+	}
+	</script>
+
+
+
+
+
+
+
+
+

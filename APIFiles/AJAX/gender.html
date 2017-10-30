@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Gender API
+	</title>
+</head>
+<body>
+	<h2>Enter name to determine gender</h2>
+	<form action="/" method="post" id="form">
+		<label>First Name </label><br/>
+		<input type="text" name="name" id="name" /><br/>
+		<input type="submit" value="Determine Gender"/>
+	</form>	
+
+	<p id="result"></p>
+
+	<script>
+	var formHandle = document.getElementById('form');
+	var nameHandle = document.getElementById('name');
+	var resultHandle = document.getElementById('result');
+	formHandle.onsubmit = function(e){
+		e.preventDefault();
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET',"https://www.gender-api.com/get?key=pRPLCejozFwCFbVCR&name=" + nameHandle.value);
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState == 4 && xhr.status ==200){
+				var response = JSON.parse(xhr.responseText);
+				resultHandle.innerHTML = "The Gender of " + nameHandle.value + " is " +	 response.gender;
+			}
+		};
+
+		xhr.send();
+	}
+	</script>
+
+<!-- nameHandle.onblur = function(){
+		 	if (nameHandle.value.length == 0){
+		 		detailsHandle.innerHTML ="cannot be blanck";
+		 	}
+		 	else {
+		 		detailsHandle.innerHTML = "";
+		 	}  
+		 };
+ -->
+
+
+</body>
+</html>

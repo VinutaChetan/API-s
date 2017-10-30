@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hash Tag Generator</title>
+</head>
+<body>
+	
+	<b>Enter your Sentence : </b>
+
+	<input type="text" id="sentence"/>
+	<p id="details"></p>
+
+	<script>
+		 var sentenceHandle = document.getElementById('sentence');
+		 var detailsHandle = document.getElementById('details');
+
+
+		 //var statement = prompt("Enter your sentence");
+		  
+		 // sentenceHandle.innerHTML =  sentence;
+		 
+		 // detailsHandle.innerHTML = "<h2>" + sentence + "</h2>";
+
+		 sentenceHandle.onfocus = function(){
+		 	detailsHandle.innerHTML = "Enter your sentence";
+		 };
+
+		 sentenceHandle.onblur = function(){
+		 	//console.log(sentenceHandle.value);
+		 	var output = "#";
+		 	var words= sentenceHandle.value.split("");
+		 	words.forEach(function(word){
+			word = word[0].toUpperCase() + word.substr(1,word.length);
+			output += word;  
+			detailsHandle.innerHTML  = output;
+			sentenceHandle.value = "";
+			});
+		 };
+	</script>	 
+</body>
+</html>

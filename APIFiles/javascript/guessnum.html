@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script>
+  var name =prompt("Enter your name");
+  var targetNumber = Math.round(Math.random() * 100); 
+  console.log(targetNumber);
+  var min = 1;
+  var max = 100;
+  
+  while(guess == targetNumber){
+  	var guess = Number(prompt("Guess my number between " + min + "-"  + max));
+    console.log(guess);
+  	if ( guess<targetNumber  ){
+      console.log("Your guess was Low!! guess number between " + min + "-"  + max);
+    }else if ( guess>targetNumber ){
+      console.log("Your guess was Low!! guess number between " + min + "-" + max);
+    }else{
+      console.log("Good Job" +  name + "!." + "you guessed my number" + targetNumber);
+      break;
+    }
+    playerGuess++;
+  }
+</script>
+</body>
+</html>

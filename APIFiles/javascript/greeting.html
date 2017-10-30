@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Greeting</title>
+</head>
+<body>
+	<p id="msg"> Welcome : </p>
+	<p id="notice"></p>
+
+	<b>Enter Your name : </b>
+	<input type="text" id="name"/>
+	<p id="details"></p>
+
+	<script>
+		 var msgHandle = document.getElementById('msg');
+		 var noticeHandle = document.getElementById('notice');
+		 var nameHandle = document.getElementById('name');
+		 var detailsHandle = document.getElementById('details');
+
+
+		 var name = prompt("Enter your name");
+		 msgHandle.innerHTML = "Welcome" + name;
+		 noticeHandle.innerHTML = "<h2>" + name + "</h2>";
+
+		 nameHandle.onfocus = function(){
+		 	detailsHandle.innerHTML = "Enter your first name and last name";
+		 };
+
+		 nameHandle.onblur = function(){
+		 	if (nameHandle.value.length == 0){
+		 		detailsHandle.innerHTML ="cannot be blanck";
+		 	}
+		 	else {
+		 		detailsHandle.innerHTML = "";
+		 	}  
+		 };
+	</script>	 
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Cities List
+	</title>
+	<script>
+	window.onload = function(){
+		var cities = document.getElementsByTagName('li');
+		
+		for(var i=0;i<cities.length;i++){
+			
+			var cityName = cities[i].innerHTML;	
+			// console.log(cities[i]);
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET',"http://api.openweathermap.org/data/2.5/weather?APPID=a8437fc2adc27c16cfa3bd63f5b72258&units=matric&q="+cityName);
+
+			xhr.onreadystatechange = function(){
+			
+			if(xhr.readyState== 4 && xhr.status==200){
+				var result= JSON.parse(xhr.responseText);
+				
+				cities.innerHTML = cityName + " temp : " +result.main.temp;
+				console.log(cities.innerHTML);
+			}	
+
+			}
+		
+		xhr.send();
+	};	
+ 
+}
+</script>
+</head>
+<body>
+	<ul>
+		<li>Bangalore</li>
+		<li>Chennai</li>
+		<li>Mumbai</li>
+	</ul>	
+	
+</body>
+</html>

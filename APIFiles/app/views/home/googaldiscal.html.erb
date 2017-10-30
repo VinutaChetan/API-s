@@ -1,0 +1,21 @@
+<h2>Find your dream job</h2>
+<%= form_tag home_googaldiscal_path,method: :get do %>
+
+	<label>Technology</label><br/>
+	<%= text_field_tag :origin%> <br/><br/>
+
+	<label>Locatin</label><br/>
+	<%= text_field_tag :destination%><br/><br/>
+
+	<%=submit_tag "Search.."%>
+
+<%end%>
+
+
+
+<% unless @result.nil? %>
+	<b>Origin :</b><%=@result["origin_addresses"].join(",")%>
+	<b>Destination :</b><%=@result["destination_addresses"].join(",")%>
+	<b>Distance :</b> <%=@result["rows"][0]["elements"][0]["distance"]["text"]%><br/>
+	<b>Travl Time : </b><%=@result["rows"][0]["elements"][0]["duration"]["text"]%><br/>
+<%end%>	

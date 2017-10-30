@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Leaves Managment
+	</title>
+</head>
+<body>
+	<form id="leaveform">
+	<label>Start Date: </label><br/>
+	<input type="text"  id="startDate" placeholder="yyyy/mm/dd"/><br/><br/>		
+	
+	<label>End Date: </label><br/>
+	<input type="text"  id="endDate" placeholder="yyyy/mm/dd"/><br/><br/>		
+
+	<p id="leaveDates">
+
+	</p>
+	<script>
+	var startDateHandle= document.getElementById("startDate");
+	var startDate;
+	var endDate;
+	var endDateHandle = document.getElementById("endDate");
+	var leaveDatesHandle = document.getElementById("leaveDates");
+
+	function makeDateObj(strDate){
+		var strDate = strDate.split("-");
+		var year = strDate[0];
+		var month = strDate[0]-1;
+		var date = strDate[2];
+		strDate = new Date(year,month,date);
+		return strDate;
+	}
+
+	startDateHandle.onblur = function(){
+		startDate = makeDateObj(startDateHandle.value);
+		console.log(startDate);
+	}	
+		
+	endDateHandle.onblur = function(){
+		endDate = makeDateObj(endDateHandle.value);
+		console.log(endDate);
+
+		if (endDate.getTime() < startDate.getTime()){
+			leaveDatesHandle.innerHTML = "end Date is less than start date";
+		} else{
+			var leaveDates=startDate;
+
+			//console.log(leaveDates);
+			var diff = new Date(endDate -startDate);
+			console.log(diff);
+			var dates = diff/1000/60/60/24;
+			leaveDatesHandle.innerHTML = dates;
+			var holidays =[];
+			var dayCount=0;
+			//holidays[0] = makeDateObj(startDateHandle.value);
+			for(var i=0;i<=dates;i++){
+				holidays.push(new Date(startDate.setDate(startDate.getDate()+dayCount)));
+				dayCount = 1;
+			}
+			console.log(holidays);
+			var output = "";
+			var holidayCounter =0;
+			holidays.forEach(function(date){
+				if(date.getDay() == 0){
+					output +=date + "Holiday <br/>" ;
+				} else {
+					output += date + "<input type='radio' name=" +date.getTime() +" />Full" + "<input type='radio' name=" +date.getTime() +" /> Half<br/>";
+					holidayCounter++;
+				}
+			});
+			leaveDatesHandle.innerHTML = output + "<br/> Total Leaves applying for :" + holidayCounter;
+
+		}
+
+	}		
+	</script>
+
+</body>
+</html>
