@@ -1,6 +1,6 @@
 if @person.nil?
 	node(:error){"#{params[:id]} not found"}
-elsif @state.valid?
+elsif @person.valid?
 	node(:message){" successfully updated"}	
 	node(:status){"200"}
 else
